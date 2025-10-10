@@ -2,15 +2,19 @@ import React, { useState } from 'react';
 import ResumeForm from './components/ResumeForm';
 import ResumePreview from './components/ResumePreview';
 import { ResumeData } from './types/resume';
-import { Container, Typography, Box  } from '@mui/material';
+import { Container, Typography, Grid, Box } from '@mui/material';
 
 const App: React.FC = () => {
   const [formData, setFormData] = useState<ResumeData>({
     firstName: '',
     lastName: '',
+    job: '',
     email: '',
     phone: '',
-    summary: ''
+    country: '',
+    city: '',
+    summary: '',
+    experience: []
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -22,26 +26,49 @@ const App: React.FC = () => {
   };
 
   return (
-    <Container maxWidth="lg" disableGutters sx={{ paddingTop: 4 }}>
-        <Typography variant="h4" component="h1" gutterBottom>
-          Генератор резюме
-        </Typography>
+    <Box sx={{ backgroundColor: '#f4f4f4', minHeight: '100vh', py: 4 }}>
+      <Container maxWidth="lg">
 
-        <Box 
-          display="flex" 
-          flexDirection={{ xs: 'column', md: 'row' }}
-          gap={4}
-          alignItems="flex-start" 
-          sx={{ overflowX: 'auto' }}
-        >
-          <Box sx={{ flexShrink: 0, minWidth: '300px', maxWidth: '400px', width: '100%' }}>
-            <ResumeForm data={formData} onChange={handleChange} />
-          </Box>
-          <Box sx={{ flexShrink: 0 }}>
-            <ResumePreview data={formData} />
-          </Box>
-        </Box>
-    </Container>
+        <Grid container spacing={4} alignItems="center" sx={{ mb: 2 }}>
+          <Grid size={6}>
+            <Typography variant="h5" component="h1">
+              Генератор резюме
+            </Typography>
+          </Grid>
+          <Grid size={6}>
+            <Typography
+              variant="h5"
+              sx={{ textAlign: { xs: 'left', md: 'right' } }}
+            >
+              Предпросмотр резюме
+            </Typography>
+          </Grid>
+        </Grid>
+
+        <Grid container spacing={4} justifyContent="center" alignItems="flex-start">
+
+          <Grid size={6}>
+            <Box
+              sx={{
+                backgroundColor: '#fff',
+                p: 3,
+                borderRadius: 2,
+                boxShadow: '0 2px 8px rgba(0,0,0,0.1)'
+              }}
+            >
+              <ResumeForm data={formData} onChange={handleChange} />
+            </Box>
+          </Grid>
+          
+          <Grid size={6}>
+              <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+                <ResumePreview data={formData} />
+              </Box>
+          </Grid>
+
+        </Grid>
+      </Container>
+    </Box>
   );
 };
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import { ResumeData } from '../types/resume';
 import { TextField, Box } from '@mui/material';
+import ExperienceSection from './ExperienceSection';
 
 interface Props {
     data: ResumeData;
@@ -13,8 +14,8 @@ const ResumeForm: React.FC<Props> = ({ data, onChange }) => {
             component="form"
             display="flex"
             flexDirection="column"
-            gap={2}
-            sx={{ maxWidth:600, marginBottom: 4 }}
+            gap={1}
+            sx={{ maxWidth:600, marginBottom: 2 }}
         >
             <TextField
                 label="Имя"
@@ -27,6 +28,13 @@ const ResumeForm: React.FC<Props> = ({ data, onChange }) => {
                 label="Фамилия"
                 name="lastName"
                 value={data.lastName}
+                onChange={onChange}
+                fullWidth
+            />
+            <TextField
+                label="Должность"
+                name="job"
+                value={data.job}
                 onChange={onChange}
                 fullWidth
             />
@@ -47,6 +55,20 @@ const ResumeForm: React.FC<Props> = ({ data, onChange }) => {
                 fullWidth
             />
             <TextField
+                label="Страна"
+                name="country"
+                value={data.country}
+                onChange={onChange}
+                fullWidth
+            />
+            <TextField
+                label="Город"
+                name="city"
+                value={data.city}
+                onChange={onChange}
+                fullWidth
+            />
+            <TextField
                 label="О себе"
                 name="summary"
                 value={data.summary}
@@ -54,6 +76,18 @@ const ResumeForm: React.FC<Props> = ({ data, onChange }) => {
                 multiline
                 rows={4}
                 fullWidth
+            />
+
+             <ExperienceSection
+                experience={data.experience}
+                onChange={(updated) =>
+                onChange({
+                    target: {
+                    name: 'experience',
+                    value: updated
+                    }
+                } as any)
+                }
             />
         </Box>
     );
