@@ -3,6 +3,7 @@ import ResumeForm from './components/ResumeForm';
 import ResumePreview from './components/ResumePreview';
 import { ResumeData } from './types/resume';
 import { Container, Typography, Grid, Box } from '@mui/material';
+import PagedResumePreview from './components/PagedResumePreview';
 
 const App: React.FC = () => {
   const [formData, setFormData] = useState<ResumeData>({
@@ -26,8 +27,8 @@ const App: React.FC = () => {
   };
 
   return (
-    <Box sx={{ backgroundColor: '#f4f4f4', minHeight: '100vh', py: 4 }}>
-      <Container maxWidth="lg">
+    <Box sx={{ backgroundColor: '#f4f4f4', minHeight: '100vh', py: 2, overflowX: 'hidden' }}>
+      <Container maxWidth={false} sx={{ maxWidth: '1600px', px: 2 }}>
 
         <Grid container spacing={4} alignItems="center" sx={{ mb: 2 }}>
           <Grid size={6}>
@@ -47,7 +48,7 @@ const App: React.FC = () => {
 
         <Grid container spacing={4} justifyContent="center" alignItems="flex-start">
 
-          <Grid size={6}>
+          <Grid size={5}>
             <Box
               sx={{
                 backgroundColor: '#fff',
@@ -59,11 +60,11 @@ const App: React.FC = () => {
               <ResumeForm data={formData} onChange={handleChange} />
             </Box>
           </Grid>
-          
-          <Grid size={6}>
-              <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-                <ResumePreview data={formData} />
-              </Box>
+
+          <Grid size={7}>
+            <PagedResumePreview>
+              <ResumePreview data={formData} />
+            </PagedResumePreview>
           </Grid>
 
         </Grid>

@@ -13,6 +13,11 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { ExperienceItem } from '../types/resume';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import dayjs from 'dayjs';
+
 
 interface Props {
   experience: ExperienceItem[];
@@ -97,22 +102,20 @@ const ExperienceSection: React.FC<Props> = ({ experience, onChange }) => {
                 onChange={(e) => handleChange(exp.id, 'position', e.target.value)}
                 fullWidth
               />
-              <Stack direction="row" spacing={2}>
-                <TextField
-                  label="Дата начала"
-                  type="date"
-                  value={exp.startDate}
-                  onChange={(e) => handleChange(exp.id, 'startDate', e.target.value)}
-                  fullWidth
-                />
-                <TextField
-                  label="Дата окончания"
-                  type="date"
-                  value={exp.endDate}
-                  onChange={(e) => handleChange(exp.id, 'endDate', e.target.value)}
-                  fullWidth
-                />
-              </Stack>
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <Stack direction="row" spacing={2}>
+                  <DatePicker
+                    label="Дата начала"
+                    value={exp.startDate ? dayjs(exp.startDate) : null}
+                    onChange={(newValue) => handleChange(exp.id, 'startDate', newValue?.toString() || '')}
+                  />
+                  <DatePicker
+                    label="Дата окончания"
+                    value={exp.endDate ? dayjs(exp.endDate) : null}
+                    onChange={(newValue) => handleChange(exp.id, 'endDate', newValue?.toString() || '')}
+                  />
+                </Stack>
+              </LocalizationProvider>
               <TextField
                 label="Описание"
                 value={exp.description}
