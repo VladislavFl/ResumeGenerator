@@ -15,7 +15,9 @@ const App: React.FC = () => {
     country: '',
     city: '',
     summary: '',
-    experience: []
+    experience: [],
+    education: [],
+    language: [],
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {

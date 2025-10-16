@@ -8,6 +8,8 @@ export interface ResumeData {
     city: string;
     summary: string;
     experience: ExperienceItem[];
+    education: EducationItem[];
+    language: LanguageItem[];
 }
 
 export interface ExperienceItem {
@@ -19,4 +21,20 @@ export interface ExperienceItem {
   startDate: string;
   endDate: string;
   description: string;
+}
+
+export interface EducationItem {
+  id: number;
+  school: string;
+  degree: string;
+  faculty: string;
+  startDate: string;
+  endDate: string;
+  description: string;
+}
+
+export interface LanguageItem {
+  id: number;
+  language: string;
+  level: string;
 }

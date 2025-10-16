@@ -2,6 +2,8 @@ import React from 'react';
 import { ResumeData } from '../types/resume';
 import { TextField, Box } from '@mui/material';
 import ExperienceSection from './ExperienceSection';
+import EducationSection from './EducationSection';
+import LanguageSection from './LanguageSection';
 
 interface Props {
     data: ResumeData;
@@ -15,7 +17,7 @@ const ResumeForm: React.FC<Props> = ({ data, onChange }) => {
             display="flex"
             flexDirection="column"
             gap={1}
-            sx={{ maxWidth:600, marginBottom: 2 }}
+            sx={{ maxWidth: 600, marginBottom: 2 }}
         >
             <TextField
                 label="Имя"
@@ -78,17 +80,42 @@ const ResumeForm: React.FC<Props> = ({ data, onChange }) => {
                 fullWidth
             />
 
-             <ExperienceSection
+            <ExperienceSection
                 experience={data.experience}
                 onChange={(updated) =>
-                onChange({
-                    target: {
-                    name: 'experience',
-                    value: updated
-                    }
-                } as any)
+                    onChange({
+                        target: {
+                            name: 'experience',
+                            value: updated
+                        }
+                    } as any)
                 }
             />
+
+            <EducationSection
+                education={data.education}
+                onChange={(updated) =>
+                    onChange({
+                        target: {
+                            name: 'education',
+                            value: updated
+                        }
+                    } as any)
+                }
+            />
+
+            <LanguageSection
+                language={data.language}
+                onChange={(updated) =>
+                    onChange({
+                        target: {
+                            name: 'language',
+                            value: updated
+                        }
+                    } as any)
+                }
+            />
+
         </Box>
     );
 };

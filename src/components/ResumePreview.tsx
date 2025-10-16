@@ -109,6 +109,56 @@ const ResumePreview: React.FC<Props> = ({ data }) => {
                 )}
             </Box>
 
+
+            <Box sx={{ mt: 1 }}>
+                <Typography variant="subtitle1" gutterBottom>
+                    Образование:
+                </Typography>
+
+                {data.education.length === 0 ? (
+                    <Typography variant="body2">—</Typography>
+                ) : (
+                    data.education.map((exp) => (
+                        <Box key={exp.id} sx={{ mb: 2 }}>
+                            <Typography variant="body1" fontWeight="bold">
+                                {exp.school} — {exp.degree}
+                            </Typography>
+                            <Typography variant="body2" color="text.secondary">
+                                {exp.faculty} | {formatDate(exp.startDate)} — {formatDate(exp.endDate)}
+                            </Typography>
+                            <Typography 
+                                variant="body2" 
+                                sx={{ 
+                                    whiteSpace: 'pre-line',
+                                    wordWrap: 'break-word',
+                                    overflowWrap: 'break-word',
+                                    wordBreak: 'break-word'
+                                }}
+                            >
+                                {exp.description}
+                            </Typography>
+                        </Box>
+                    ))
+                )}
+            </Box>
+
+
+            <Box sx={{ mt: 1 }}>
+                <Typography variant="subtitle1" gutterBottom>
+                    Языки:
+                </Typography>
+
+                {data.language.length === 0 ? (
+                    <Typography variant="body2">—</Typography>
+                ) : (
+                    <Typography variant="body1" fontWeight="bold" sx={{ whiteSpace: 'normal' }}>
+                        {data.language.map(
+                            (exp) => `${exp.language} - ${exp.level}`)
+                            .join('; ')}
+                    </Typography>
+                )}
+            </Box>
+
         </Box>
     );
 };
