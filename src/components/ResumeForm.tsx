@@ -4,6 +4,7 @@ import { TextField, Box } from '@mui/material';
 import ExperienceSection from './ExperienceSection';
 import EducationSection from './EducationSection';
 import LanguageSection from './LanguageSection';
+import LinkSection from './LinkSection';
 
 interface Props {
     data: ResumeData;
@@ -110,6 +111,18 @@ const ResumeForm: React.FC<Props> = ({ data, onChange }) => {
                     onChange({
                         target: {
                             name: 'language',
+                            value: updated
+                        }
+                    } as any)
+                }
+            />
+
+            <LinkSection
+                link={data.link}
+                onChange={(updated) =>
+                    onChange({
+                        target: {
+                            name: 'link',
                             value: updated
                         }
                     } as any)

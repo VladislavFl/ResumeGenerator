@@ -1,6 +1,6 @@
 import React from 'react';
 import { ResumeData } from '../types/resume';
-import { Typography, Box, Stack } from '@mui/material';
+import { Typography, Box, Stack, Link } from '@mui/material';
 import EmailIcon from '@mui/icons-material/Email';
 import PhoneIcon from '@mui/icons-material/Phone';
 import dayjs from 'dayjs';
@@ -50,23 +50,46 @@ const ResumePreview: React.FC<Props> = ({ data }) => {
                 {data.job}
             </Typography>
 
-            <Stack direction="row" spacing={1} alignItems="center" sx={{ mt: 1 }}>
-                <EmailIcon fontSize="small" color="action" />
-                <Typography variant="body1">{data.email}</Typography>
+            <Stack
+                direction="row"
+                spacing={1}
+                alignItems="center"
+                justifyContent="space-between"
+                sx={{ mt: 1 }}
+            >
+                <Stack direction="row" spacing={1} alignItems="center">
+                    <EmailIcon fontSize="small" color="action" />
+                    <Typography variant="body2">{data.email}</Typography>
+                </Stack>
+
+                <Stack direction="row" spacing={1} alignItems="center">
+                    {data.link?.map((exp, index) => (
+                        <Typography key={index} variant="body2">
+                            <Link
+                                href={exp.link}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                underline="hover"
+                            >
+                                {exp.label}
+                            </Link>
+                        </Typography>
+                    ))}
+                </Stack>
             </Stack>
 
             <Stack direction="row" spacing={1} alignItems="center" sx={{ mt: 1 }}>
                 <PhoneIcon fontSize="small" color="action" />
-                <Typography variant="body1">{data.phone}</Typography>
+                <Typography variant="body2">{data.phone}</Typography>
             </Stack>
 
             <Box sx={{ mt: 1 }}>
                 <Typography variant="subtitle1" gutterBottom>
                     О себе:
                 </Typography>
-                <Typography 
+                <Typography
                     variant="body2"
-                    sx={{ 
+                    sx={{
                         whiteSpace: 'pre-line',
                         wordWrap: 'break-word',
                         overflowWrap: 'break-word',
@@ -93,9 +116,9 @@ const ResumePreview: React.FC<Props> = ({ data }) => {
                             <Typography variant="body2" color="text.secondary">
                                 {exp.location} | {formatDate(exp.startDate)} — {formatDate(exp.endDate)}
                             </Typography>
-                            <Typography 
-                                variant="body2" 
-                                sx={{ 
+                            <Typography
+                                variant="body2"
+                                sx={{
                                     whiteSpace: 'pre-line',
                                     wordWrap: 'break-word',
                                     overflowWrap: 'break-word',
@@ -126,9 +149,9 @@ const ResumePreview: React.FC<Props> = ({ data }) => {
                             <Typography variant="body2" color="text.secondary">
                                 {exp.faculty} | {formatDate(exp.startDate)} — {formatDate(exp.endDate)}
                             </Typography>
-                            <Typography 
-                                variant="body2" 
-                                sx={{ 
+                            <Typography
+                                variant="body2"
+                                sx={{
                                     whiteSpace: 'pre-line',
                                     wordWrap: 'break-word',
                                     overflowWrap: 'break-word',

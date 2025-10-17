@@ -10,6 +10,7 @@ export interface ResumeData {
     experience: ExperienceItem[];
     education: EducationItem[];
     language: LanguageItem[];
+    link: LinkItem[];
 }
 
 export interface ExperienceItem {
@@ -37,4 +38,10 @@ export interface LanguageItem {
   id: number;
   language: string;
   level: string;
+}
+
+export interface LinkItem {
+  id: number;
+  label: string;
+  link: string;
 }

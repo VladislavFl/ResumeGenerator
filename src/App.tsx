@@ -1,12 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ResumeForm from './components/ResumeForm';
 import ResumePreview from './components/ResumePreview';
 import { ResumeData } from './types/resume';
 import { Container, Typography, Grid, Box } from '@mui/material';
 import PagedResumePreview from './components/PagedResumePreview';
 
-const App: React.FC = () => {
-  const [formData, setFormData] = useState<ResumeData>({
+const STORAGE_KEY = 'resumeGeneratorData';
+
+const getInitialData = (): ResumeData => {
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) {
+      return JSON.parse(saved);
+    }
+  } catch (error) {
+    console.error('Error loading data from localStorage:', error);
+  }
+
+  return {
     firstName: '',
     lastName: '',
     job: '',
@@ -18,7 +29,12 @@ const App: React.FC = () => {
     experience: [],
     education: [],
     language: [],
-  });
+    link: [],
+  };
+};
+
+const App: React.FC = () => {
+  const [formData, setFormData] = useState<ResumeData>(getInitialData());
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -27,6 +43,14 @@ const App: React.FC = () => {
       [name]: value
     }));
   };
+
+  useEffect(() => {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(formData));
+    } catch (error) {
+      console.error('Error saving data to localStorage:', error);
+    }
+  }, [formData]);
 
   return (
     <Box sx={{ backgroundColor: '#f4f4f4', minHeight: '100vh', py: 2, overflowX: 'hidden' }}>
